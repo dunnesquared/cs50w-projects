@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Other auto-generated files ###
+.DS_Store
+style.css.map
+.pytest_cache
+
+# Ignore database files to avoid merge conflicts later
+*.db
+*.sqlite3
+
+# Virtual environment folder
+venv
+
+# misc
+todo*
+
+ 
