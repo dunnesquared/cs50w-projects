@@ -1,0 +1,78 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+Shopping Cart
+{% endblock %}
+
+{% load static %}
+
+{% block jsfiles %}
+  {# <script src="{% static 'orders/checkfields.js' %}"></script> #}
+{% endblock %}
+
+
+
+{% block body %}
+
+  <h1>Shopping Cart</h1>
+
+  <p>Please double-check the contents of your cart. Remove any unwanted items
+     or proceed to checkout!</p>
+
+  {% if cart is none %}
+    <p>
+      <em>
+        Cart does not exist. To create a cart, add an item from the menu.
+      </em>
+    </p>
+  {% else  %}
+
+    <h2>Contents of Cart no. {{ cart.id }}, created {{ cart.created_at }}</h1>
+
+    <form action="{% url 'checkout' %}" method="post">
+      {% csrf_token %}
+
+      {% if cart_items %}
+        <table>
+          <tr>
+            <th>Item</th>
+            <th>Size</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Remove from cart</th>
+          </tr>
+
+
+          {% for cart_item in cart_items %}
+            <tr>
+               <td class="left-justify">{{ cart_item.name }}</td>
+               <td>{{ cart_item.get_size_display }}</td>
+               <td>{{ cart_item.qty }}</td>
+               <td class="right-justify">${{ cart_item.price }}</td>
+               <td>
+                 <button
+                    id=""
+                    name="remove" type="submit" value="{{ cart_item.id }}"
+                    alt="remove item">🗑</button>
+               </td>
+            </tr>
+          {% endfor %}
+
+          </table>
+
+          <br>
+
+          <button id="" name="checkout" type="submit" value="{{ cart.id }}" />Proceed to Checkout</button>
+
+      {% else %}
+        <p> Your cart is empty. Why don't you fill it up with pizza😸!! </p>
+
+      {% endif %}
+
+    </form>
+
+  {% endif %}
+
+
+
+{% endblock %}

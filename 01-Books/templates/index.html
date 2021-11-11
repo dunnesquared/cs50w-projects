@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Bookr - Home
+{% endblock %}
+
+{% block body %}
+  <h1>Welcome!</h1>
+
+  <p>Welcome to <b>Bookr</b>, the site where you can search for information and
+    write reviews about your favourite books.</p>
+
+  <p>Click one of the links below to get started!</p>
+
+  <div>
+    <a href="{{ url_for('login') }}">Login</a>
+  </div>
+
+  <div>
+    <a href="{{ url_for('register') }}">Register</a>
+  </div>
+
+  <div>
+    <a href="{{ url_for('search') }}">Search</a>
+  </div>
+
+{% endblock %}

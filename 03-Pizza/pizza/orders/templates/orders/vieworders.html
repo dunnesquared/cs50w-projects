@@ -1,0 +1,68 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+View Orders
+{% endblock %}
+
+{% load static %}
+
+{% block jsfiles %}
+  {# <script src="{% static 'orders/checkfields.js' %}"></script> #}
+{% endblock %}
+
+
+{% block body %}
+
+  <h1>Orders</h1>
+
+  <h2>Pending</h2>
+
+  {% for order in orders %}
+    <ul>
+      {% if order.status == "P" %}
+        <li><a href="{% url 'order_summary' order_id=order.id %}">
+          Order ID: {{ order.id }},
+          User ID: {{ order.user.id }},
+          Created on: {{ order.created_at }},
+          Total: ${{ order.total }}
+          </a>
+      </li>
+
+      {% endif %}
+    </ul>
+  {% endfor %}
+
+
+  <h2>Ready for Pickup</h2>
+
+  {% for order in orders %}
+    <ul>
+      {% if order.status == "R" %}
+        <li><a href="{% url 'order_summary' order_id=order.id %}">
+          Order ID: {{ order.id }},
+          User ID: {{ order.user.id }},
+          Created on: {{ order.created_at }},
+          Total: ${{ order.total }}
+        </a></li>
+      {% endif %}
+    </ul>
+  {% endfor %}
+
+
+  <h2>Completed</h2>
+
+  {% for order in orders %}
+    <ul>
+      {% if order.status == "C" %}
+        <li><a href="{% url 'order_summary' order_id=order.id %}">
+          Order ID: {{ order.id }},
+          User ID: {{ order.user.id }},
+          Created on: {{ order.created_at }},
+          Total: ${{ order.total }}
+        </a></li>
+      {% endif %}
+    </ul>
+  {% endfor %}
+
+
+{% endblock %}

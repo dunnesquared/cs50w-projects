@@ -1,0 +1,41 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+Enter Credit Card Details
+{% endblock %}
+
+{% load static %}
+
+{% block jsfiles %}
+  <!-- Execute creditcard.js after document has been parsed. Prevent
+  DOMContentLoaded event from firing until script has loaded and finished
+  evaluating. -->
+  <script src="{% static 'orders/creditcard.js' %}" defer></script>
+  <script src="https:/js.stripe.com/v3/"></script>
+{% endblock %}
+
+
+{% block body %}
+
+  <h1>Credit Card Details</h1>
+
+  <p> Enter credit card credentials in the box below to pay for and finalize
+      your order.</p>
+
+  <form id="payment-form">
+    {% csrf_token %}
+
+    <div id ="card-element" autofocus>
+      <!-- Elements will create input elements here -->
+    </div>
+
+    <!-- Error messages will go in this element -->
+    <div id="card-errors" role="alert"></div>
+
+    <br>
+
+    <button type="submit" id="submit">Pay ${{ total }}</button>
+  </form>
+
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+Place Order
+{% endblock %}
+
+{% load static %}
+
+{% block jsfiles %}
+  {# <script src="{% static 'orders/checkfields.js' %}"></script> #}
+{% endblock %}
+
+
+{% block body %}
+
+  <h1>Order confirmed!</h1>
+
+  <h2>Summary</h2>
+
+
+  <table>
+    <tr>
+      <th>Order ID: </th>
+      <td class="left-justify"> {{ order.id }} </td>
+    </tr>
+
+    <tr>
+      <th>Customer: </th>
+      <td class="left-justify"> {{ user.first_name }}&nbsp;{{ user.last_name }} </td>
+    </tr>
+
+    <tr>
+      <th>Time placed: </th>
+      <td class="left-justify"> {{ order.created_at }} </td>
+    </tr>
+
+    <tr>
+      <th>Items: </th>
+
+      <td class="left-justify">
+
+        {% for order_item in order_items %}
+          <pre>{{ order_item.name }} (Size: {{ order_item.get_size_display }}), ${{ order_item.price }}</pre>
+        {% endfor %}
+
+      </td>
+    </tr>
+
+    <tr>
+      <th>Total: </th>
+      <td class="left-justify">${{ order.total }}</td>
+    </tr>
+
+    <tr>
+      <th>Status: </th>
+      <td class="left-justify"> {{ order.get_status_display }} </td>
+    </tr>
+
+  </table>
+
+  <p>Thank you for choosing Pinnochio's Pizza!</p>
+
+  <p><em>N.B. Please print this page for your records. Refreshing this page will
+  cause the information on it to disappear. Don't worry—we have your order
+  and will take care of it asap!</em></p>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+Error
+{% endblock %}
+
+{% load static %}
+
+{% block jsfiles %}
+  {# <script src="{% static 'orders/checkfields.js' %}"></script> #}
+{% endblock %}
+
+
+{% block body %}
+
+  <h1>Error</h1>
+
+  <p> {{ err_message }} </p>
+
+
+{% endblock %}

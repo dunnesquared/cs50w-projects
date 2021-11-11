@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Flack::Logout
+{% endblock %}
+
+{% block body %}
+
+  <script src="{{ url_for('static', filename='logout.js') }}"></script>
+
+  <h1>Log out</h1>
+
+  <p>You have logged out. Thank you using Flack! </p>
+
+{% endblock %}

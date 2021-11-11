@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Bookr - Search
+{% endblock %}
+
+{% block body %}
+
+  {% if login_confirmation is not none %}
+    <p class="alert alert-success"> {{ login_confirmation }} </p>
+  {% endif %}
+
+  <h1>Search</h1>
+
+  <p>Search for a book using at least one of the fields below!
+  </p>
+
+  <form action="{{ url_for('search_results') }}" method="get">
+
+    <!-- Submitted username already in use; alert user -->
+    {% if message is not none %}
+      <!-- <p class="warning-message"> {{ message }} </p> -->
+      <p class="alert alert-danger"> {{ message }} </p>
+    {% endif %}
+
+    <div class="form-group">
+      <label for="isbn">ISBN:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="isbn"
+        id="isbn">
+    </div>
+
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        id="title">
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="author"
+        id="author">
+    </div>
+
+    <div class="form-group">
+      <button id="submit" class="btn btn-primary">Search</button>
+    </div>
+
+  </form>
+
+  <script src="{{ url_for('static', filename='search.js') }}"></script>
+
+{% endblock %}

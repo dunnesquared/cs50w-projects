@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}Flack::Join Chat{% endblock %}
+
+{% block body %}
+
+  <script src="{{ url_for('static', filename='joinchat.js') }}"></script>
+
+  <h1>Welcome to Flack!! Join the chat!</h1>
+
+  <form id="username_form" action="{{ url_for('join_chat') }}" method="post">
+    <!-- Submitted username already in use; alert user -->
+    {% if message is not none %}
+      <p class="alert alert-danger"> {{ message }} </p>
+    {% endif %}
+
+    <div class="form-group">
+      <label for="username">Please enter your display name (max 20 characters; alphanumeric, '_', '.', and '@' characters only):
+      </label>
+      <input
+        type="text"
+        class="form-control text-field"
+        name="username"
+        maxlength=20
+        id="username" required>
+    </div>
+
+    <div class="form-group">
+      <button id="submit" class="btn btn-secondary">Join</button>
+    </div>
+
+  </form>
+
+
+{% endblock %}

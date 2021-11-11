@@ -1,0 +1,62 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+Place Order
+{% endblock %}
+
+{% load static %}
+
+{% block jsfiles %}
+  {# <script src="{% static 'orders/checkfields.js' %}"></script> #}
+{% endblock %}
+
+
+{% block body %}
+
+  {% if cart is none %}
+  <h1> Error </h1>
+    <p>
+      <em>
+        {{ message }}
+      </em>
+    </p>
+  {% else  %}
+
+  <h1>Place Order</h1>
+
+  <form action="{% url 'credit_card' %}" method="post">
+    {% csrf_token %}
+
+    {% if cart_items %}
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Size</th>
+          <th>Price</th>
+        </tr>
+
+
+        {% for cart_item in cart_items %}
+          <tr>
+             <td class="left-justify">{{ cart_item.name }}</td>
+             <td>{{ cart_item.get_size_display }}</td>
+             <td class="right-justify">${{ cart_item.price}}</td>
+          </tr>
+        {% endfor %}
+
+        </table>
+
+        <p> <strong>Total = </strong> ${{ total }} </p>
+
+        <button id="" name="confirm" type="submit" value="{{ total }}" />Confirm</button>
+
+    {% else %}
+      <p> Error: Your cart is empty. </p>
+
+    {% endif %}
+
+
+  {% endif %}
+
+
+{% endblock %}

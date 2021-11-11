@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Bookr - Login
+{% endblock %}
+
+{% block body %}
+
+  <h1>Login</h1>
+
+
+    <form action="{{ url_for('login') }}" method="post">
+      <!-- Submitted username already in use; alert user -->
+      {% if message is not none %}
+        <p class="alert alert-danger"> {{ message }} </p>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="username">Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          id="username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password" required>
+      </div>
+
+      <div class="form-group">
+        <button id="submit" class="btn btn-primary">Login</button>
+      </div>
+
+    </form>
+
+  <script src="{{ url_for('static', filename='credentials.js') }}"></script>
+
+{% endblock %}

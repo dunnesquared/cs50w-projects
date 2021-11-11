@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Bookr - Create Account
+{% endblock %}
+
+{% block body %}
+  <h1>Create Account</h1>
+
+  <p> To register for Rook Beviews, please enter a user name and password
+      to create an account.
+  </p>
+
+  <form action="{{ url_for('register') }}" method="post">
+
+    <!-- Submitted username already in use; alert user -->
+    {% if message is not none %}
+      <!-- <p class="warning-message"> {{ message }} </p> -->
+      <p class="alert alert-danger"> {{ message }} </p>
+    {% endif %}
+
+
+    <div class="form-group">
+      <label for="username">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        id="username" required>
+    </div>
+
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        id="password" required>
+    </div>
+
+    <div class="form-group">
+      <button id="submit" class="btn btn-primary">Register</button>
+    </div>
+
+  </form>
+
+  <script src="{{ url_for('static', filename='credentials.js') }}"></script>
+
+{% endblock %}

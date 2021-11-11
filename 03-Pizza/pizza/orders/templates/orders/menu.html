@@ -1,0 +1,180 @@
+{% extends "orders/base.html" %}
+
+
+{% block title %}
+Menu
+{% endblock %}
+
+{% load static %}
+
+{% block jsfiles %}
+  <script src="{% static 'orders/menu.js' %}"></script>
+{% endblock %}
+
+
+
+{% block body %}
+
+
+  <h1> Menu </h1>
+
+
+    <h2>Regular Pizzas</h2>
+
+    <form id="rPizzaForm" action="{% url 'cart' %}" method="post">
+
+      {% csrf_token %}
+
+      <select id="rPizzaList" name="regular-pizza">
+        <option value="">--Please choose an option--</option>
+
+        {% for regular_pizza in regular_pizzas %}
+          <option data-num_regtoppings="{{ regular_pizza.num_toppings }}" value="{{ regular_pizza.id }}">{{ regular_pizza }}</option>
+        {% endfor %}
+      </select>
+
+
+      <h3>Toppings</h3>
+
+      {% for pizza_topping in pizza_toppings %}
+
+          <input class="rPizzaCheckBox" type="checkbox" id="rptop_{{pizza_topping.id}}" name="pizza-topping" value="{{ pizza_topping.id }}">
+          <label class="rPizzaLabel" for="rptop_{{pizza_topping.id}}">{{ pizza_topping }}</label>
+          <br>
+
+      {% endfor %}
+
+      <br>
+      <input id="rPizzaSubmit" type="submit" value="Add to cart"></input>
+
+     </form>
+
+  <hr>
+
+    <h2>Sicilian Pizzas</h2>
+
+    <form id="sPizzaForm" action="{% url 'cart' %}" method="post">
+
+      {% csrf_token %}
+
+      <select id="sPizzaList" name="sicilian-pizza">
+        <option value="">--Please choose an option--</option>
+
+        {% for sicilian_pizza in sicilian_pizzas %}
+          <option data-num_toppings="{{ sicilian_pizza.num_toppings }}" value="{{ sicilian_pizza.id }}">{{ sicilian_pizza }}</option>
+        {% endfor %}
+
+      </select>
+
+      <h3>Toppings</h3>
+
+      {% for pizza_topping in pizza_toppings %}
+
+          <input class="sPizzaCheckBox" type="checkbox" id="sptop_{{pizza_topping.id}}" name="pizza-topping" value="{{ pizza_topping.id }}">
+          <label class="sPizzaLabel" for="sptop_{{pizza_topping.id}}">{{ pizza_topping }}</label>
+          <br>
+
+      {% endfor %}
+
+      <br>
+      <input id="sPizzaSubmit" type="submit" value="Add to cart"></input>
+   </form>
+
+
+  <hr>
+
+  <h2>Subs</h2>
+
+  <form id="subForm" action="{% url 'cart' %}" method="post">
+
+    {% csrf_token %}
+
+    <select id="subList" name="sub-sandwich">
+      <option value="">--Please choose an option--</option>
+
+      {% for sub in subs %}
+        <option value="{{ sub.id }}">{{ sub }}</option>
+      {% endfor %}
+
+    </select>
+
+    <h3>Extras</h3>
+    {% for sub_topping in sub_toppings %}
+
+        <input class="subCheckBox" type="checkbox" id="stop_{{sub_topping.id}}" name="sub-topping" value="{{ sub_topping.id }}" />
+        <label class="subLabel" for="stop_{{sub_topping.id}}">{{ sub_topping }}</label>
+        <br>
+
+    {% endfor %}
+
+    <br>
+    <input id="subSubmit" type="submit" value="Add to cart"></input>
+
+  </form>
+
+  <hr>
+
+  <h2>Pastas</h2>
+
+  <form id="pastaForm" action="{% url 'cart' %}" method="post">
+
+    {% csrf_token %}
+
+    <select id="pastaList" name="pasta">
+      <option value="">--Please choose an option--</option>
+
+      {% for pasta in pastas %}
+        <option value="{{ pasta.id }}">{{ pasta }}</option>
+      {% endfor %}
+
+    </select>
+    <input id="pastaSubmit" type="submit" value="Add to cart"></input>
+
+  </form>
+
+  <hr>
+
+  <h2>Salads</h2>
+
+  <form id="saladForm" action="{% url 'cart' %}" method="post">
+
+    {% csrf_token %}
+
+    <select id="saladList" name="salad">
+      <option value="">--Please choose an option--</option>
+
+      {% for salad in salads %}
+        <option value="{{ salad.id }}">{{ salad }}</option>
+      {% endfor %}
+
+    </select>
+    <input id="saladSubmit" type="submit" value="Add to cart"></input>
+
+  </form>
+
+
+  <hr>
+
+  <h2>Dinner Platters</h2>
+  <form id="dinnerPlatterForm" action="{% url 'cart' %}" method="post">
+
+    {% csrf_token %}
+
+    <select id="dinnerPlatterList" name="dinnerplatter">
+
+      <option value="">--Please choose an option--</option>
+
+      {% for dinnerplatter in dinnerplatters %}
+        <option value="{{ dinnerplatter.id }}">{{ dinnerplatter }}</option>
+      {% endfor %}
+
+    </select>
+
+    <input id="dinnerPlatterSubmit" type="submit" value="Add to cart"/>
+
+  </form>
+
+
+  <img src="{% static "orders/pinocchio_72.gif" %}" alt="Pinocchio!">
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Flack::Channels
+{% endblock %}
+
+{% block body %}
+
+  {% if message is not none %}
+    <div class="alert alert-success alert-dismissible fade show alert-size" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endif %}
+
+  <h1>Channels</h1>
+
+  <ul id="channels">
+    {% for channel_name in channels %}
+      <li>
+        <!-- <a href="{{ url_for('show_channel', channel_name=channel_name, username=username) }}"
+          alt="{{channel_name}}"> #{{channel_name}} </li> -->
+          <a href="{{ url_for('show_channel', channel_name=channel_name, username=username) }}" alt="{{channel_name}}"> #{{channel_name}} </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

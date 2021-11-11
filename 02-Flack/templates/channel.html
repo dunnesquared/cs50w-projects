@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Flack::Channel Name
+{% endblock %}
+
+
+{% block body %}
+  <script>
+    // Current channel will always be considered the last channel visited
+    localStorage.setItem('channel_name', '{{ channel_name }}');
+    console.log(localStorage.getItem('channel_name'));
+  </script>
+
+  <script src="{{ url_for('static', filename='channel.js') }}"></script>
+
+  <!-- Data that will be broadcast to each user connected to the server socket with each sent message. -->
+  <span hidden id="dataUserName" data-username="{{ username }}"></span>
+  <span hidden id="dataChannelName" data-channel-name="{{ channel_name }}"></span>
+
+    <!-- <p class="alert alert-success alert-size"> {{ message }} </p> -->
+  {% if message is not none %}
+    <div class="alert alert-success alert-dismissible fade show alert-size" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col">
+      <h1> #{{ channel_name }}</h1>
+    </div>
+  </div>
+
+  <section id="channel-main-area" class="row justify-content-center">
+    <div id="posts" class="small-screen col">
+
+      {% for post in channels[channel_name]['posts'] %}
+        <div class="one-post">
+          <div class="post-content">
+            {% if post['file'] %}
+              <a href="{{ post['href'] }}" target="_blank" alt="{{ post['file_name'] }}">{{ post['file_name'] }}</a>
+            {% else %}
+              {{ post['content'] }}
+            {% endif %}
+          </div>
+
+          <div class="post-meta">
+            <span id="author">{{ post['author'] }}</span>
+            <span id="datetime">{{ post['timestamp']}}</span>
+          </div>
+        </div>
+        <br>
+      {% endfor %}
+    </div>
+   </section>
+
+
+    <section id="post-input" class="row">
+      <div class="col">
+        <div class="row">
+          <div id="new-post" class="form-group col-lg-11 col-sm-10">
+             <label for="post-textarea"><strong>Post:</strong></label>
+             <textarea class="form-control" id="post-textarea" rows="2"></textarea>
+          </div>
+         <div class="form-group col-lg-1 col-sm-2 align-self-end">
+            <button id="submit" type="submit" class="btn btn-secondary bg-dark">Post</button>
+          </div>
+        </div>
+
+
+      <div id="upload-row-container" class="row">
+        <div class="col-lg-3">
+          <form enctype="multipart/form-data" method="post" id="upload-form" name="fileinfo">
+                <input type="file"  class="btn btn-info" id="selected-file" name="file" required>
+        </div>
+        <div class="col-lg-9 my-auto">
+          <button id="upload" type="submit" class="btn btn-secondary bg-dark">Upload</button>
+        </div>
+          </form> <!-- Looks weird but you need to include the button-->
+      </div>
+
+      </div>
+    </section>
+
+{% endblock %}

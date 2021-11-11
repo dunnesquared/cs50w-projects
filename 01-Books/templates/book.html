@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Bookr - Book Details
+{% endblock %}
+
+{% block body %}
+  <section>
+    <h2>Book Details</h2>
+
+    <table class="table table-striped">
+      <tr>
+        <th> Title </th>
+        <td> {{ book.title }} </td>
+      </tr>
+      <tr>
+        <th> Author </th>
+        <td> {{ book.author }} </td>
+      </tr>
+      <tr>
+        <th> IBSN </th>
+        <td> {{ book.isbn }} </td>
+      </tr>
+      <tr>
+        <th> Publication Year </th>
+        <td> {{ book.year }} </td>
+      </tr>
+      <tr>
+        <th> Number of ratings on Goodreads </th>
+        <td> {{ goodreads_data['work_ratings_count'] }} </td>
+      </tr>
+      <tr>
+        <th> Average rating on Goodreads </th>
+        <td> {{ goodreads_data['average_rating'] }} out of 5 </td>
+      </tr>
+    </table>
+
+  </section>
+
+  <section>
+    <h2>Reviews</h2>
+
+    {% if reviews %}
+
+      {% for review in reviews  %}
+        <p>{{ review.opinion }} (Score: {{ review.rating }} out of 5) --{{ review.name }} </p>
+      {% endfor %}
+
+    {% else %}
+      <p> There are no reviews for this book. Be the first to write one! </p>
+    {% endif %}
+
+  </scetion>
+
+  <section>
+    <h2>Submit a review</h2>
+
+    {% if wrote_review %}
+      <p> You have already written a review for this book. </p>
+
+    {% else %}
+      <form action="{{ url_for('review', book_id=book.id) }}" method="post">
+        <div class="form-group">
+          <!-- <label for="reviewtext">Review:</label> -->
+          <textarea
+            class="form-control"
+            rows="10"
+            name="reviewtext"
+            id="reviewtext"
+            placeholder="Write your book review here..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="rating">Rating:</label>
+          <input
+           id="rating"
+           name="rating"
+           type="number"
+           min=1
+           max=5 required> out of 5.
+        </div>
+
+        <div class="form-group">
+          <button id="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    {% endif %}
+  </section>
+
+  <script src="{{ url_for('static', filename='review.js') }}"></script>
+
+{% endblock %}

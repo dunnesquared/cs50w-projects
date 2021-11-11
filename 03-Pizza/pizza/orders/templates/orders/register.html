@@ -1,0 +1,51 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% load static %}
+
+{% block jsfiles %}
+  <script src="{% static 'orders/checkfields.js' %}"></script>
+{% endblock %}
+
+
+
+{% block body %}
+
+  <h2>Register</h2>
+
+  <form id="input-form" action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <label for="firstname">First Name:</label><br>
+    <input class="input-field" id="firstname"  name="firstname" type="text" autocomplete="off" autofocus />
+
+    <br><br>
+
+    <label for="lastname">Last Name:</label><br>
+    <input class="input-field" id="lastname"  name="lastname" type="text" autocomplete="off" />
+
+    <br><br>
+
+    <label for="email">Email:</label><br>
+    <input class="input-field" id="email"  name="email" type="email" autocomplete="off" />
+
+    <br><br>
+
+    <label for="username">Username:</label><br>
+    <input class="input-field" id="username"  name="username" type="text" autocomplete="off" />
+
+    <br><br>
+
+    <label for="password">Password:</label><br>
+    <input class="input-field" id="password" name="password" type="password" autocomplete="off" />
+
+    <br><br>
+
+    <input type="submit" value="Create Account">
+  </form>
+
+  <p><em>All ready a customer? Click <a href="{% url 'login' %}" alt="register link">here</a> to login.</em></p>
+
+{% endblock %}

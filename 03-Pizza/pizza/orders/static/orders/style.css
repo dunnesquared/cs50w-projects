@@ -1,0 +1,118 @@
+body {
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+/* To build a tricolor Italian flag */
+/* Special thanks to Captain Anonymous, ttps://codepen.io/anon/pen/ZywmeO */
+.container{
+  display: flex; /* align each flag's bar along horizontal axis */
+  align-items: stretch; /* have bars take up vertical full space of container  */
+  border-bottom-width: medium;
+  border-bottom-style: double;
+  padding-bottom: 0.2em;
+  margin-bottom: 0.5em;
+}
+
+.side{
+  flex-grow: 1; /* Bars should be of equal width */
+  flex-basis: 10em; /* width of sidebars */
+}
+
+.center{
+  flex-basis: 40em; /* width of centre bar; prevent centre from being squished */
+  text-align: center;
+}
+
+.red{
+  background:red;
+}
+
+.green{
+  background: green;
+}
+
+.center img{
+  float:right;
+  width: 48px;
+  height: auto;
+}
+
+/*  Navigation bar */
+.customer-name{
+  text-align: center;
+}
+
+.nav-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border-bottom-width: medium;
+  border-bottom-style: double;
+  padding-bottom: 0.2em;
+}
+
+.nav-button{
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Styling of menu buttons copied directly from pinnochiospizza.net */
+.nav-button a {
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  font-size: 80%;
+  color: #be0027;
+  font-family: Verdana,Arial,Helvetica,sans-serif;
+  font-weight: bold;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  background-color: #ffffff;
+  text-decoration: none;
+}
+
+.nav-button a:link {text-decoration: none;}
+.nav-button a:visited {text-decoration: none;}
+.nav-button a:hover {text-decoration: none; color: #ffffff; background-color: #be0027;}
+
+
+/* Table formatting */
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+th, td{
+  padding: 0.2em;
+}
+
+.left-justify{
+  text-align: left;
+}
+
+.right-justify{
+  text-align: right;
+}
+
+td pre {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+
+/* Stripe Credit Card input area */
+#card-element{
+  border-style: inset;
+  padding: 1em;
+}
+
+#card-errors{
+  color: red;
+  padding-top: 0.2em;
+
+}

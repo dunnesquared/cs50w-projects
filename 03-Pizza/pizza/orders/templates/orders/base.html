@@ -1,0 +1,61 @@
+<!<!DOCTYPE html>
+
+
+<html>
+  <head>
+      <title>Pinocchio's Pizza & Subs: {% block title %}{% endblock %}</title>
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href="{% static 'orders/style.css' %}">
+
+      {% block jsfiles %}{% endblock %}
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="green side"></div>
+        <div class="center">
+          <img src="{% static "orders/pinocchio_72.gif" %}" alt="Pinocchio!"/>
+          <h1>Pinnochio's Pizza & Subs Online Ordering System</h1>
+
+
+        </div>
+      <div class="red side"></div>
+    </div>
+
+
+    {% if user.is_authenticated %}
+
+        <div class="customer-name"><strong> Customer: {{ user.get_full_name }} <strong></div>
+      <hr>
+
+      <nav class="nav-container">
+
+        <div class="nav-button"><a href="{% url 'menu' %}">Menu</a></div>
+        <div class="nav-button"><a href="{% url 'cart' %}">Shopping cart</a></div>
+
+        {% if user.username == 'admin' %}
+          <div class="nav-button"><a href="{% url 'view_order' %}">View Orders</a></div>
+        {% endif %}
+
+        <div class="nav-button"><a href="{% url 'logout' %}">Logout</a></div>
+
+      </nav>
+
+    {% endif %}
+
+    {% if message is not none %}
+      <br>
+      <div id="message">
+        <strong><em>*** {{ message }} ***</em></strong>
+      </div>
+    {% endif %}
+
+
+    {% block body %}
+    {% endblock %}
+  </body>
+</html>

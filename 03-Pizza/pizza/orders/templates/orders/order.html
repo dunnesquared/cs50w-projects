@@ -1,0 +1,66 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+Order Summary
+{% endblock %}
+
+{% load static %}
+
+{% block jsfiles %}
+  {# <script src="{% static 'orders/checkfields.js' %}"></script> #}
+{% endblock %}
+
+
+{% block body %}
+
+  <h1>Order Summary</h1>
+
+  <table>
+    <tr>
+      <th>Order ID: </th>
+      <td class="left-justify"> {{ order.id }} </td>
+    </tr>
+
+    <tr>
+      <th>Customer: </th>
+      <td class="left-justify"> {{ order.user.first_name }}&nbsp;{{ order.user.last_name }} </td>
+    </tr>
+
+    <tr>
+      <th>Email: </th>
+      <td class="left-justify"> {{ order.user.email }} </td>
+    </tr>
+
+    <tr>
+      <th>Time placed: </th>
+      <td class="left-justify"> {{ order.created_at }} </td>
+    </tr>
+
+    <tr>
+      <th>Items: </th>
+
+      <td class="left-justify">
+
+          {% for order_item in order_items %}
+            <pre>{{ order_item.name }} (Size: {{ order_item.get_size_display }}), ${{ order_item.price }}</pre>
+          {% endfor %}
+
+      </td>
+    </tr>
+
+    <tr>
+      <th>Total: </th>
+      <td class="left-justify">${{ order.total }}</td>
+    </tr>
+
+    <tr>
+      <th>Status: </th>
+      <td class="left-justify"> {{ order.get_status_display }} </td>
+    </tr>
+
+  </table>
+
+
+
+
+{% endblock %}
